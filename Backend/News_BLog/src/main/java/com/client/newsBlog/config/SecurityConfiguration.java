@@ -42,22 +42,22 @@ public class SecurityConfiguration {
                         .requestMatchers("/boostrapVendor/**", "/boostrapVendor/*...", "/boostrapVendor").permitAll()
         );
 
-        http
-                .formLogin(form ->
-                        form
-                                .loginPage("/loginUser")
-                                .successHandler(new RoleBasedAuthenticaionSuccessHandler())
-                                .failureUrl("/index?loginError")
-                                .permitAll()
-                )
-                .logout(logout ->
-                        logout
-                                .logoutUrl("/logout")
-                                .logoutSuccessUrl("/index")
-                                .permitAll()
-                );
-                http
-                .csrf(csrf -> csrf.disable());
+//        http
+//                .formLogin(form ->
+//                        form
+//                                .loginPage("/loginUser")
+//                                .successHandler(new RoleBasedAuthenticaionSuccessHandler())
+//                                .failureUrl("/index?loginError")
+//                                .permitAll()
+//                )
+//                .logout(logout ->
+//                        logout
+//                                .logoutUrl("/logout")
+//                                .logoutSuccessUrl("/index")
+//                                .permitAll()
+//                );
+//                http
+//                .csrf(csrf -> csrf.disable());
 
 
         return http.build();
