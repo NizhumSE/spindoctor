@@ -328,3 +328,7 @@ li img {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.site_title{
+    text-align-last: center;
+}
