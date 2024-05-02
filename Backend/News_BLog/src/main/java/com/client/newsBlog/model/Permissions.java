@@ -2,6 +2,10 @@ package com.client.newsBlog.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -12,5 +16,11 @@ public class Permissions {
     @Column(name = "permission_id")
     private Long permissionId;
     @Column(name = "permission_name")
-    private String permissionName;;
+    private String permissionName;
+
+    @CreationTimestamp
+    @Column(name="datecreated", updatable = false)
+    private Timestamp dateCreated;
+    @UpdateTimestamp
+    private Timestamp updatedAt;
 }

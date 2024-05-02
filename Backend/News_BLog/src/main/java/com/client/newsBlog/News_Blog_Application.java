@@ -11,12 +11,17 @@ package com.client.newsBlog;
 //import jakarta.annotation.PostConstruct;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.CommandLineRunner;
+import com.client.newsBlog.model.Role;
+import com.client.newsBlog.model.User;
 import com.client.newsBlog.repository.RoleRepository;
+import com.client.newsBlog.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.context.annotation.Bean;
 
 
@@ -24,29 +29,25 @@ import org.springframework.context.annotation.Bean;
 @EnableConfigurationProperties
 public class News_Blog_Application {
 
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(News_Blog_Application.class, args);
 	}
 
 	@Bean
-	CommandLineRunner run(RoleRepository roleRepository){
+	CommandLineRunner run(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		return args -> {
-//			if(roleRepository.findByAuthority("ADMIN").isPresent()) return;
-//			System.out.println("*** Added admin with Phonenumber: 'admin' and password '123' ***");
-//			roleRepository.save(new Role("ADMIN"));
-//			roleRepository.save(new Role("SUB ADMIN"));
-//			roleRepository.save(new Role("USER"));
-//			roleRepository.save(new Role("NURSE"));
-//			roleRepository.save(new Role("PHYSIO"));
-//			roleRepository.save(new Role("PATIENT"));
-//			roleRepository.save(new Role("MERCHANT"));
-//			roleRepository.save(new Role("ASSIGNED PERSON"));
-//
-//
-//			User admin = new User("admin", "123", "ADMIN"); //Password not hashed. Need to add hashed password.
-//			userRepository.save(admin);
+			Role adminRole = roleRepository.findByRoleName("ADMIN");
+			if(adminRole != null){
+				System.out.println("*** Admin already exists ***");
+				return;
+			}
+			System.out.println("*** Added admin with Email: 'admin@admin.com' and password 'admin' ***");
+			adminRole = new Role("ADMIN");
+			roleRepository.save(adminRole);
+
+			String password = passwordEncoder.encode("admin");
+			User adminUser = new User("Admin", "admin@admin.com", password, "ADMIN");
+			userRepository.save(adminUser);
 		};
 	}
 

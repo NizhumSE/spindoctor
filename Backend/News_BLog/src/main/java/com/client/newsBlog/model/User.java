@@ -1,7 +1,12 @@
 package com.client.newsBlog.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -17,7 +22,21 @@ public class User {
     private String phoneNumber;
     private String password;
     private String userImagePath;
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "role_id")
-    private Role role;
+    private String roleName;
+
+    @CreationTimestamp
+    @Column(name="datecreated", updatable = false)
+    private Timestamp dateCreated;
+    @UpdateTimestamp
+    private Timestamp updatedAt;
+
+    public User(String firstName, String email, String password, String roleName) {
+        this.firstName = firstName;
+        this.email = email;
+        this.password = password;
+        this.roleName = roleName;
+    }
+
+    public User() {
+    }
 }

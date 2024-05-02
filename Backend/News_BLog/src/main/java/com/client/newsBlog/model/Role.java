@@ -13,10 +13,19 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
     private Long roleId;
-    private String authority;
+    @Column(name = "role_name")
+    private String roleName;
+
     @CreationTimestamp
     @Column(name="datecreated", updatable = false)
     private Timestamp dateCreated;
     @UpdateTimestamp
     private Timestamp updatedAt;
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Role() {
+    }
 }

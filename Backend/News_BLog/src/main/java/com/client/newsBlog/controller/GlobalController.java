@@ -27,8 +27,8 @@ public class GlobalController {
             String userEmail = ((UserDetails) principal).getUsername();
             User user = UserRepository.findByEmail(userEmail);
             if (user != null) {
-                List<RolePermission> rolePermission = rolePermissionRepository.findByRole(user.getRole());
-                return adminPanelRolePermission.getPermissionName(rolePermission);
+//                List<RolePermission> rolePermission = rolePermissionRepository.findByRole_RoleName(user.getRoleName());
+//                return adminPanelRolePermission.getPermissionName(rolePermission);
             }
         }
         return new ArrayList<>();
