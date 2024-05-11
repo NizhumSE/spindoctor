@@ -17,6 +17,8 @@ public class Permissions {
     private Long permissionId;
     @Column(name = "permission_name")
     private String permissionName;
+    private String URL;
+    private boolean hasSubCategory;
 
     @CreationTimestamp
     @Column(name="datecreated", updatable = false)
