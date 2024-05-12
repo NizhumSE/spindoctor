@@ -25,8 +25,7 @@
     <link th:href="@{/css/adminPanelCss/login_admin.css}" rel="stylesheet">
 
 </head>
-<body>
-<div class="background-container">
+<body class="form-body">
     <div class="login-container">
         <h2 class="color-changer">Admin Panel Login</h2>
         <form action="#" th:action="@{/auth/loginUser}" th:object="${userRequestDTO}" method="post">
@@ -40,7 +39,6 @@
             <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
     </div>
-</div>
 
 <!-- jQuery -->
 <script th:src="@{/boostrapVendor/jquery/dist/jquery.min.js}"></script>
