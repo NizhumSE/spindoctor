@@ -19,10 +19,11 @@ public class Permissions {
     private String permissionName;
     private String URL;
     private boolean hasSubCategory;
-
+    private String iconPath;
     @CreationTimestamp
     @Column(name="datecreated", updatable = false)
     private Timestamp dateCreated;
     @UpdateTimestamp
     private Timestamp updatedAt;
+
 }
