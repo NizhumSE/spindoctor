@@ -32,6 +32,7 @@
     <link th:href="@{/css/adminPanelCss/admin_custom.min.css}" rel="stylesheet">
     <link th:href="@{/css/adminPanelCss/style.css}" rel="stylesheet">
     <link th:href="@{/css/adminPanelCss/dropdown.css}" rel="stylesheet">
+    <link th:href="@{/css/adminPanelCss/toggleButton.css}" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -50,8 +51,6 @@
 
                 </header>
                 <!-- /sidebar menu -->
-
-                <!-- /menu footer buttons -->
 
                 <!-- /menu footer buttons -->
             </div>
@@ -89,23 +88,47 @@
                         <div class="row x_title height-700">
                             <!--Right search buttons-->
                             <div class="box-border">
-<!--                                <form action="#" th:action="@{/auth/role}" method="post" th:object="${dto}">-->
-                                    <form action="#" th:action="@{/auth/role}" method="post">
-
+                                <form action="#" th:action="@{/auth/permissoins/add}" method="post"
+                                      th:object="${permissionDTO}">
                                     <div class="x_panel tile fixed_height_420 overflow_hidden">
                                         <div class="Merchant">
-                                            <p class="font-m">Permission Name:</p>
+                                            <p class="font-m">Permission Name:*</p>
                                             <div class="title">
                                                 <div class="navbar pt-4">
                                                     <div class="search-bar-xsm">
-<!--                                                        <input th:field="*{authority}" type="text"  placeholder="Enter role name" th:value="${dto.authority}">-->
+                                                        <input th:field="*{permissionName}" type="text"
+                                                               placeholder="Enter permission name" required>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="Merchant pt-4">
+                                            <p class="font-m">Permission URL:*</p>
+                                            <div class="title">
+                                                <div class="navbar pt-4">
+                                                    <div class="search-bar-xsm">
+                                                        <input th:field="*{url}" type="text" placeholder="Enter URL" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="title">
+                                            <p class="paragraph pt-4 mt-4">Prescription SubCategory:</p>
+                                            <div class="navbar">
+                                                <label class="switch">
+                                                    <input id="subCatToggle" type="checkbox" value="false" onchange="getValue(this);">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!--                                            To set Value -->
+                                        <input id="toSetValue" th:field="*{hasSubCategory}" style="display: none;">
+                                        <!--                                            To set Value -->
+
 
                                         <div class="margin-sm title d-flex mt-4">
-                                            <div class="button-group-container"style="margin-left: 15px;">
+                                            <div class="button-group-container" style="margin-left: 15px;">
                                                 <button class="merchant-button pdf-button" type="submit">ADD</button>
                                             </div>
 
@@ -116,32 +139,14 @@
                                 </form>
                             </div>
                         </div>
-                        <!--table finished-->
-
-                        <!--                        <div class="clearfix"></div>-->
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 
-<!--<script >-->
-<!--    function updateMerchantType(element) {-->
-<!--        var selectedValue = element.getAttribute('value');-->
-<!--        var merchantTypeSpan = document.getElementById('merchantTypeSpan');-->
-<!--        merchantTypeSpan.textContent = selectedValue;-->
-<!--    }-->
-<!--</script>-->
-<!--<script th:inline="javascript">-->
-<!--    function updateCountryCode(element) {-->
-<!--        var selectedValue = element.getAttribute('value');-->
-<!--        var countryCodeSpan = document.getElementById('countryCodeSpan');-->
-<!--        countryCodeSpan.textContent = selectedValue;-->
-<!--    }-->
-<!--</script>-->
-<!-- jQuery -->
+
 <script th:src="@{/boostrapVendor/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap -->
 <script th:src="@{/boostrapVendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
@@ -182,6 +187,20 @@
 <!-- Custom Theme Scripts -->
 <script th:src="@{/js/adminPanelJs/custom.min.js}"></script>
 <script th:src="@{/js/adminPanelJs/alartsInAdmin.js}"></script>
+
+<script th:inline="javascript">
+    function getValue(element){
+        let setterId = document.getElementById("toSetValue");
+        if(element.checked){
+            setterId.value = "true";
+            console.log("Yes");
+        }else{
+            setterId.value = "false";
+            console.log("No");
+        }
+    }
+</script>
+
 
 </body>
 </html>

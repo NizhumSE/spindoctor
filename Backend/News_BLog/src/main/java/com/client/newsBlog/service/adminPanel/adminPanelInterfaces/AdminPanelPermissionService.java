@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AdminPanelPermissionService {
     List<PermissionRequestDTO> getAllPermissions();
+    String addPermission(PermissionRequestDTO permissionRequestDTO);
 }

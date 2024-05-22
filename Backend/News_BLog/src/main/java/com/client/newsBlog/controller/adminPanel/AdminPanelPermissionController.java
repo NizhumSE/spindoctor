@@ -1,5 +1,4 @@
 package com.client.newsBlog.controller.adminPanel;
-
 import com.client.newsBlog.dto.adminPanel.request.PermissionRequestDTO;
 import com.client.newsBlog.service.adminPanel.adminPanelInterfaces.AdminPanelPermissionService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,5 +24,11 @@ public class  AdminPanelPermissionController {
     @GetMapping("/add")
     public String addPermission(Model model, @ModelAttribute("permissionDTO") PermissionRequestDTO permissionDTO) {
         return "AdminPanel/Permission/permissions-add";
+    }
+
+    @PostMapping("/add")
+    public String addPermissionPost(Model model, @ModelAttribute("permissionDTO") PermissionRequestDTO permissionDTO) {
+        String param = adminPanelPermissionService.addPermission(permissionDTO);
+        return "redirect:/auth/permissoins?" + param;
     }
 }
