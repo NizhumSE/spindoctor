@@ -7,9 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" th:href="@{/assets/images/adminImages/wellax-logo.png}" type="image/ico">
+    <link rel="icon" th:href="@{/assets/images/adminImages/dg_logo.png}" type="image/ico">
 
-    <title>Wellax Admin Panel</title><link rel="icon" th:href="@{/assets/images/wellax_fav.png}" type="image/x-icon">
+
+    <title>Desher Gorjon Admin Panel</title>
 
     <!-- Bootstrap -->
     <link th:href="@{/boostrapVendor/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
@@ -39,8 +40,8 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title">
-                    <a th:href="@{/index}" class="site_title"><img th:src="@{/assets/images/adminImages/wellax-logo.png}"
-                                                                   alt="image"> </a>
+                    <a th:href="@{/index}" class="site_title"><img th:src="@{/assets/images/adminImages/dg_logo.png}"
+                                                                   alt="image" style="height: 62px;"> </a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -68,7 +69,7 @@
             <div class="row d-flex">
                 <!--navbar start-->
                 <div class="navbar">
-                    <span class="font-l">Add New Role</span>
+                    <span class="font-l">Add New Permission</span>
                 </div>
                 <div class="navbar">
                     <div class="search-bar">
@@ -88,14 +89,16 @@
                         <div class="row x_title height-700">
                             <!--Right search buttons-->
                             <div class="box-border">
-                                <form action="#" th:action="@{/auth/role}" method="post" th:object="${dto}">
+<!--                                <form action="#" th:action="@{/auth/role}" method="post" th:object="${dto}">-->
+                                    <form action="#" th:action="@{/auth/role}" method="post">
+
                                     <div class="x_panel tile fixed_height_420 overflow_hidden">
                                         <div class="Merchant">
-                                            <p class="font-m">Role Name:</p>
+                                            <p class="font-m">Permission Name:</p>
                                             <div class="title">
                                                 <div class="navbar pt-4">
                                                     <div class="search-bar-xsm">
-                                                        <input th:field="*{authority}" type="text"  placeholder="Enter role name" th:value="${dto.authority}">
+<!--                                                        <input th:field="*{authority}" type="text"  placeholder="Enter role name" th:value="${dto.authority}">-->
                                                     </div>
                                                 </div>
                                             </div>

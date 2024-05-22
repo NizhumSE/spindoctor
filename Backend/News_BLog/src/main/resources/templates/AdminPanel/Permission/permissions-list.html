@@ -8,9 +8,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" th:href="@{/assets/images/adminImages/dg_logo.png}" type="image/ico">
+
 
     <title>Desher Gorjon Admin Panel</title>
-    <link rel="icon" th:href="@{/assets/images/wellax_fav.png}" type="image/x-icon">
 
 
     <!-- Bootstrap -->
@@ -206,9 +207,8 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title">
-                    <a th:href="@{/index}" class="site_title"><img
-                            th:src="@{/assets/images/adminImages/wellax-logo.png}"
-                            alt="image"> </a>
+                    <a th:href="@{/index}" class="site_title"><img th:src="@{/assets/images/adminImages/dg_logo.png}"
+                                                                   alt="image" style="height: 62px;"> </a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -484,8 +484,10 @@
                                         <div class="dropdown">
                                             <button class="dropbtn">Action</button>
                                             <div id="myDropdown" class="dropdown-content">
-                                                <a th:href="@{/auth/role/update/{name}(name=${role})}" type="button" class="btn-dark" >Edit</a>
-                                                <a th:href="@{/auth/role/delete/{name}(name=${role})}" type="button" class="btn-danger" >Delete</a>
+                                                <a th:href="@{/auth/role/update/{name}(name=${role})}" type="button"
+                                                   class="btn-dark">Edit</a>
+                                                <a th:href="@{/auth/role/delete/{name}(name=${role})}" type="button"
+                                                   class="btn-danger">Delete</a>
                                             </div>
                                         </div>
                                     </td>

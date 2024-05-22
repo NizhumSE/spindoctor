@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/auth/permissoins")
 @RequiredArgsConstructor
-public class AdminPanelPermissionController {
+public class  AdminPanelPermissionController {
     private final AdminPanelPermissionService adminPanelPermissionService;
 
     @GetMapping("")
@@ -23,6 +23,6 @@ public class AdminPanelPermissionController {
 
     @GetMapping("/add")
     public String addPermission(Model model, @ModelAttribute("permissionDTO") PermissionRequestDTO permissionDTO) {
-        return "AdminPanel/Permission/add-permission";
+        return "AdminPanel/Permission/permissions-add";
     }
 }
