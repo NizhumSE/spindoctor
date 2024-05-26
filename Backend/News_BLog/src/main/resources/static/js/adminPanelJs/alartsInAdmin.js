@@ -17,6 +17,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (urlParams.has("PermissionAdded")) {
             alert("Permission Added Successfully.");
         }
+
+        if (urlParams.has("PermissionNotExist")) {
+            alert("Something Went Wrong. Please Try Again.");
+        }
+
+        if (urlParams.has("permissionDeleted")) {
+            alert("Permission Deleted Successfully.");
+        }
+
+        if (urlParams.has("updatedPermission")) {
+            alert("Permission Updated Successfully.");
+        }
     }
 
 

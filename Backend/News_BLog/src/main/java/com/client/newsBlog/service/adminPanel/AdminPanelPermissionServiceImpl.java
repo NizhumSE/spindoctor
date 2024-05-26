@@ -3,6 +3,7 @@ package com.client.newsBlog.service.adminPanel;
 import com.client.newsBlog.dto.adminPanel.request.PermissionRequestDTO;
 import com.client.newsBlog.mapper.adminPanel.EntityToDTO.PermissionDTOGetterMapper;
 import com.client.newsBlog.mapper.adminPanel.createMapperDTOtoEntity.PermissionRequestDTOSetterMapper;
+import com.client.newsBlog.mapper.adminPanel.editMapperDTOtoEntity.PermissionRequestEditDTOSetterMapper;
 import com.client.newsBlog.model.Permissions;
 import com.client.newsBlog.repository.PermissionsRepository;
 import com.client.newsBlog.service.adminPanel.adminPanelInterfaces.AdminPanelPermissionService;
@@ -17,6 +18,7 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
     private final PermissionsRepository permissionsRepository;
     private final PermissionDTOGetterMapper permissionDTOGetterMapper;
     private final PermissionRequestDTOSetterMapper permissionRequestDTOSetterMapper;
+    private final PermissionRequestEditDTOSetterMapper permissionRequestEditDTOSetterMapper;
     public List<PermissionRequestDTO> getAllPermissions() {
         return permissionsRepository.findAll().stream().map(permissionDTOGetterMapper).toList();
     }
@@ -44,5 +46,26 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
         }
 
         return param;
+    }
+
+    @Override
+    public String deletePermission(String permissionName) {
+        Permissions permissions = permissionsRepository.findPermissionsByPermissionName(permissionName);
+        if(permissions == null){
+            return "PermissionNotExist";
+        }
+        permissionsRepository.delete(permissions);
+        return "permissionDeleted";
+    }
+
+    @Override
+    public String updatePermission(String permissionName, PermissionRequestDTO permissionRequestDTO) {
+        Permissions permissions = permissionsRepository.findPermissionsByPermissionName(permissionName);
+        if(permissions == null){
+            return "permissionNotExist";
+        }
+        permissions = permissionRequestEditDTOSetterMapper.apply(permissionRequestDTO, permissions);
+        permissionsRepository.save(permissions);
+        return "updatedPermission";
     }
 }
