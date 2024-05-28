@@ -35,18 +35,39 @@
     <link th:href="@{/css/adminPanelCss/toggleButton.css}" rel="stylesheet">
     <link th:href="@{/css/adminPanelCss/table.css}" rel="stylesheet">
     <style>
-        .Merchant{
-            width: 30%;
+        .Merchant {
+            width: 22%;
         }
 
         .font-m {
             padding-left: 20px;
         }
+
+        form {
+            font-size: 14px;
+            /*width: 300px;*/
+            /*margin: auto;*/
+        }
+
+        label {
+            /*display: block;*/
+            /*margin-bottom: 5px;*/
+        }
+
+        select {
+            width: 100%;
+            height: 40px;
+            border-radius: 16px;
+            border: 1px solid #1ABB9C;
+            color: #1ABB9C;
+            /*padding: 8px;*/
+            /*margin-bottom: 10px;*/
+        }
     </style>
 </head>
 
 <body class="nav-md">
- <div class="container body">
+<div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
@@ -80,13 +101,20 @@
                 <div class="navbar">
                     <span class="font-l">Add New Permission-Subcategory</span>
                 </div>
-                <div class="navbar">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search">
-                        <button type="submit"><img th:src="@{/assets/images/adminImages/search.png}" alt="Profile Image"
-                                                   width="20"
-                                                   height="20"></button>
-                    </div>
+                <div class="navbar d-flex">
+
+                    <form id="merchantForm" method="get">
+                        <!--                        <select id="selectOption1" name="selectOption1" th:field="*{merchantTypeDTO}">-->
+                        <select id="selectOption1" name="selectOption1">
+                            <option th:text="${selectedPermissionName}"></option>
+                            <option th:each="permissoinName : ${permissionNameListDTO}"
+                                    th:value="${permissoinName}"
+                                    th:text="${permissoinName}"></option>
+                            <!--                             Add more options as needed -->
+                        </select>
+
+                        <!--                        <input type="submit" value="Submit">-->
+                    </form>
                 </div>
                 <!--nav close-->
             </div>
@@ -112,9 +140,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="margin-sm title d-flex mt-4">
+                                            <div class="margin-sm title d-flex mt-4 pt-3">
                                                 <div class="button-group-container" style="margin-left: 15px;">
-                                                    <button class="merchant-button pdf-button" type="submit">ADD</button>
+                                                    <button class="merchant-button pdf-button" type="submit">ADD
+                                                    </button>
                                                 </div>
 
                                                 <div class="clearfix"></div>
@@ -130,9 +159,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </form>
                             </div>
@@ -147,16 +173,13 @@
                 <div class="row d-flex " style="width: 100%; display: flex;">
                     <!--navbar start-->
                     <div class="navbar">
-                        <span class="navbar-text">Permission List</span>
-                        <div class="button-group-container mar-lsm">
-                            <a th:href="@{/auth/permissions/add}" class="merchant-button pdf-button" type="button">Add New
-                                Permission</a>
-                        </div>
+                        <span class="navbar-text" th:text="${selectedPermissionName + ' SubCategory List'}"></span>
                     </div>
                     <div class="navbar">
                         <div class="search-bar" style="width: 500px; position: relative;">
                             <input type="text" id="search" placeholder="Search">
-                            <button type="submit"><img th:src="@{/assets/images/adminImages/search.png}" alt="Profile Image"
+                            <button type="submit"><img th:src="@{/assets/images/adminImages/search.png}"
+                                                       alt="Profile Image"
                                                        width="20"
                                                        height="20"></button>
                         </div>
@@ -164,7 +187,8 @@
                     <div class="navbar">
                         <div class="dropdown pt-1">
                             <label>
-                                <select class="groups-button-lg column-visibility-button dropdown-button" id="searchFilter"
+                                <select class="groups-button-lg column-visibility-button dropdown-button"
+                                        id="searchFilter"
                                         onchange="searchFilterOnChangeValue()">
                                     <option>Search Filter</option>
                                 </select>
@@ -220,31 +244,29 @@
                                         <th onclick="sortTable(1)" rowspan="2" scope="col">Permission Name</th>
                                         <th rowspan="2" scope="col">Permission icon</th>
                                         <th rowspan="2" scope="col">Permission URL</th>
-                                        <th onclick="sortTable(4)" rowspan="2" scope="col">Has Sub-Categories</th>
                                         <th rowspan="2" scope="col">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!--                                <tr th:each="permissionDTO, status: ${permissionDTOList}">-->
-                                    <!--                                    <td th:text="${status.index + 1}"></td>-->
-                                    <!--                                    <td th:text="${permissionDTO.permissionName}"></td>-->
-                                    <!--                                    <td th:text="${permissionDTO.iconPath == null ? 'N/A': permissionDTO.iconPath}"></td>-->
-                                    <!--                                    <td th:text="${permissionDTO.url == null ? 'N/A' : permissionDTO.url}"></td>-->
-                                    <!--                                    <td th:text="${permissionDTO.hasSubCategory == 'true' ? 'Yes' : 'No'}"></td>-->
-                                    <!--                                    <td>-->
-                                    <!--                                        <div class="dropdown">-->
-                                    <!--                                            <button class="dropbtn">Action</button>-->
-                                    <!--                                            <div id="myDropdown" class="dropdown-content">-->
-                                    <!--                                                <a th:href="@{/auth/permissoins/update/{permissionName}(permissionName=${permissionDTO.permissionName})}"-->
-                                    <!--                                                   type="button"-->
-                                    <!--                                                   class="btn-dark">Edit</a>-->
-                                    <!--                                                <a th:href="@{/auth/permissoins/delete/{permissionName}(permissionName=${permissionDTO.permissionName})}"-->
-                                    <!--                                                   type="button"-->
-                                    <!--                                                   class="btn-danger">Delete</a>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
-                                    <!--                                    </td>-->
-                                    <!--                                </tr>-->
+                                    <tr th:each="permissionSubCatregoryDTO, status: ${permissionSubCategoryDTOList}">
+                                        <td th:text="${status.index + 1}"></td>
+                                        <td th:text="${permissionSubCatregoryDTO.permissionName}"></td>
+                                        <td th:text="${permissionSubCatregoryDTO.menuIconPath == null ? 'N/A': permissionSubCatregoryDTO.menuIconPath}"></td>
+                                        <td th:text="${permissionSubCatregoryDTO.subCategoryURL == null ? 'N/A' : permissionSubCatregoryDTO.subCategoryURL}"></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="dropbtn">Action</button>
+                                                <div id="myDropdown" class="dropdown-content">
+                                                    <a th:href="@{/auth/permissoins/update/{permissionName}(permissionName=${permissionDTO.permissionName})}"
+                                                       type="button"
+                                                       class="btn-dark">Edit</a>
+                                                    <a th:href="@{/auth/permissoins/delete/{permissionName}(permissionName=${permissionDTO.permissionName})}"
+                                                       type="button"
+                                                       class="btn-danger">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                                 <!--                            <ul class="pagination">-->
@@ -288,9 +310,7 @@
             </div>
 
 
-
         </div>
-
 
 
     </div>
@@ -338,5 +358,24 @@
 <script th:src="@{/js/adminPanelJs/custom.min.js}"></script>
 <script th:src="@{/js/table_paginations.js}"></script>
 <script th:src="@{/js/adminPanelJs/alartsInAdmin.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        let form = $('#merchantForm');
+        $('#selectOption1').change(function () {
+            let selectedValue = $(this).val();
+            // let currentURL = window.location.href;
+            let formAction;
+            formAction = '/auth/permissionsSubCategory/' + selectedValue;
+
+            form.attr('action', formAction);
+            form.submit();
+        });
+    });
+
+    // if (currentURL.includes("wellax")) {
+    //     // formAction = '/wellax/auth/recommendation/indexMerchants/' + selectedValue;
+    // } else {
+</script>
+
 </body>
 </html>

@@ -25,17 +25,15 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
 
     @Override
     public String addPermission(PermissionRequestDTO permissionRequestDTO) {
-        String param = "";
         Permissions permissions = permissionsRepository.findPermissionsByPermissionName(permissionRequestDTO.getPermissionName());
         if (permissions != null) {
-            param = "permissionAlreadyExist";
+            return "permissionAlreadyExist";
         }
-        permissions = null;
         permissions = permissionsRepository.findPermissionsByURL(permissionRequestDTO.getUrl());
         if (permissions != null) {
-            param = "PermissionUrlAlreadyExist";
+            return"PermissionUrlAlreadyExist";
         }
-        permissions = null;
+        String param = "";
         try {
             permissions = permissionRequestDTOSetterMapper.apply(permissionRequestDTO);
             permissionsRepository.save(permissions);
@@ -67,5 +65,10 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
         permissions = permissionRequestEditDTOSetterMapper.apply(permissionRequestDTO, permissions);
         permissionsRepository.save(permissions);
         return "updatedPermission";
+    }
+
+    @Override
+    public List<String> getAllPermissionName() {
+        return permissionsRepository.findAll().stream().map(Permissions::getPermissionName).toList();
     }
 }

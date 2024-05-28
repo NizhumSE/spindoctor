@@ -9,4 +9,5 @@ public interface AdminPanelPermissionService {
     String addPermission(PermissionRequestDTO permissionRequestDTO);
     String deletePermission(String permissionName);
     String updatePermission(String permissionName, PermissionRequestDTO permissionRequestDTO);
+    List<String> getAllPermissionName();
 }

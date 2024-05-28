@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/auth/permissoins")
+@RequestMapping("/auth/permissions")
 @RequiredArgsConstructor
 public class  AdminPanelPermissionController {
     private final AdminPanelPermissionService adminPanelPermissionService;
@@ -26,13 +26,13 @@ public class  AdminPanelPermissionController {
     @PostMapping("/add")
     public String addPermissionPost(Model model, @ModelAttribute("permissionDTO") PermissionRequestDTO permissionDTO) {
         String param = adminPanelPermissionService.addPermission(permissionDTO);
-        return "redirect:/auth/permissoins?" + param;
+        return "redirect:/auth/permissions?" + param;
     }
 
     @GetMapping("/delete/{permissionName}")
     public String deletePermissionPost(Model model, @PathVariable("permissionName") String permissionName) {
         String param = adminPanelPermissionService.deletePermission(permissionName);
-        return "redirect:/auth/permissoins?" + param;
+        return "redirect:/auth/permissions?" + param;
     }
 
     @GetMapping("/update/{permissionName}")
@@ -45,6 +45,6 @@ public class  AdminPanelPermissionController {
     @PostMapping("/update/{permissionName}")
     public String updatePermissionPost(Model model,@PathVariable("permissionName") String permissionName, @ModelAttribute("permissionDTO") PermissionRequestDTO permissionDTO) {
         String param = adminPanelPermissionService.updatePermission(permissionName, permissionDTO);
-        return "redirect:/auth/permissoins?" + param;
+        return "redirect:/auth/permissions?" + param;
     }
 }
