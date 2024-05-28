@@ -69,7 +69,7 @@
             <div class="row d-flex">
                 <!--navbar start-->
                 <div class="navbar">
-                    <span class="font-l">Add New Permission</span>
+                    <span class="font-l">Add New Permission-Subcategory</span>
                 </div>
                 <div class="navbar">
                     <div class="search-bar">
@@ -94,18 +94,18 @@
                                 <form action="#">
                                     <div class="x_panel tile fixed_height_420 overflow_hidden">
                                         <div class="Merchant">
-                                            <p class="font-m">Permission Name:*</p>
+                                            <p class="font-m">SubCategory Name:*</p>
                                             <div class="title">
                                                 <div class="navbar pt-4">
                                                     <div class="search-bar-xsm">
                                                         <input type="text"
-                                                               placeholder="Enter permission name" required>
+                                                               placeholder="Enter subcategory name" required>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="Merchant pt-4">
-                                            <p class="font-m">Permission URL:*</p>
+                                            <p class="font-m">SubCategory URL:*</p>
                                             <div class="title">
                                                 <div class="navbar pt-4">
                                                     <div class="search-bar-xsm">
@@ -114,21 +114,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="title">
-                                            <p class="paragraph pt-4 mt-4">Prescription SubCategory:</p>
-                                            <div class="navbar">
-                                                <label class="switch">
-                                                    <input id="subCatToggle" type="checkbox" value="false"
-                                                           onchange="getValue(this);">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <!--                                            To set Value -->
-                                        <input id="toSetValue" style="display: none;">
-                                        <!--                                            To set Value -->
-
 
                                         <div class="margin-sm title d-flex mt-4">
                                             <div class="button-group-container" style="margin-left: 15px;">
@@ -343,20 +328,5 @@
 <script th:src="@{/js/adminPanelJs/custom.min.js}"></script>
 <script th:src="@{/js/table_paginations.js}"></script>
 <script th:src="@{/js/adminPanelJs/alartsInAdmin.js}"></script>
-
-<script th:inline="javascript">
-    function getValue(element) {
-        let setterId = document.getElementById("toSetValue");
-        if (element.checked) {
-            setterId.value = "true";
-            console.log("Yes");
-        } else {
-            setterId.value = "false";
-            console.log("No");
-        }
-    }
-</script>
-
-
 </body>
 </html>
