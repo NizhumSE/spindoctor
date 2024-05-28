@@ -41,8 +41,15 @@
                     <ul class="nav child_menu">
                         <li><a th:href="@{/auth/permissions}">All Permissions</a></li>
                         <li><a th:href="@{/auth/permissions/add}">Add New Permission</a></li>
+                        <li><a>Sub-Category<span
+                                class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a th:href="@{/auth/permissionsSubCategory/Dashboard}">All Sub-Categories</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
+
             </ul>
         </div>
     </div>

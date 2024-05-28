@@ -11,8 +11,11 @@ package com.client.newsBlog;
 //import jakarta.annotation.PostConstruct;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.CommandLineRunner;
+import com.client.newsBlog.model.Permissions;
 import com.client.newsBlog.model.Role;
 import com.client.newsBlog.model.User;
+import com.client.newsBlog.repository.PermissionSubCategoryRepository;
+import com.client.newsBlog.repository.PermissionsRepository;
 import com.client.newsBlog.repository.RoleRepository;
 import com.client.newsBlog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +37,11 @@ public class News_Blog_Application {
 	}
 
 	@Bean
-	CommandLineRunner run(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+	CommandLineRunner run(PermissionsRepository permissionsRepository,
+						  RoleRepository roleRepository, UserRepository userRepository,
+						  PasswordEncoder passwordEncoder) {
 		return args -> {
+			createPermission(permissionsRepository);
 			Role adminRole = roleRepository.findByRoleName("ADMIN");
 			if(adminRole != null){
 				System.out.println("*** Admin already exists ***");
@@ -50,5 +56,17 @@ public class News_Blog_Application {
 			userRepository.save(adminUser);
 		};
 	}
+
+	private void createPermission(PermissionsRepository permissionsRepository) {
+        Permissions permissions = permissionsRepository.findPermissionsByPermissionName("Dashboard");
+        if (permissions == null) {
+            permissions = new Permissions();
+			permissions.setPermissionName("Dashboard");
+			permissions.setURL("/auth/dashboard");
+			permissions.setHasSubCategory(true);
+            permissionsRepository.save(permissions);
+			System.out.println("*** Dashboard Permission Created ***");
+        }
+    }
 
 }
