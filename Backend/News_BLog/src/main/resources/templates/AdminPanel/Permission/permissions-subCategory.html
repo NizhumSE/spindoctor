@@ -34,6 +34,15 @@
     <link th:href="@{/css/adminPanelCss/dropdown.css}" rel="stylesheet">
     <link th:href="@{/css/adminPanelCss/toggleButton.css}" rel="stylesheet">
     <link th:href="@{/css/adminPanelCss/table.css}" rel="stylesheet">
+    <style>
+        .Merchant{
+            width: 30%;
+        }
+
+        .font-m {
+            padding-left: 20px;
+        }
+    </style>
 </head>
 
 <body class="nav-md">
@@ -92,7 +101,7 @@
                                 <!--                                <form action="#" th:action="@{/auth/permissoins/add}" method="post"-->
                                 <!--                                      th:object="${permissionDTO}">-->
                                 <form action="#">
-                                    <div class="x_panel tile fixed_height_420 overflow_hidden">
+                                    <div class="x_panel tile fixed_height_420 overflow_hidden" style="display: flex;">
                                         <div class="Merchant">
                                             <p class="font-m">SubCategory Name:*</p>
                                             <div class="title">
@@ -103,8 +112,15 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="margin-sm title d-flex mt-4">
+                                                <div class="button-group-container" style="margin-left: 15px;">
+                                                    <button class="merchant-button pdf-button" type="submit">ADD</button>
+                                                </div>
+
+                                                <div class="clearfix"></div>
+                                            </div>
                                         </div>
-                                        <div class="Merchant pt-4">
+                                        <div class="Merchant">
                                             <p class="font-m">SubCategory URL:*</p>
                                             <div class="title">
                                                 <div class="navbar pt-4">
@@ -115,13 +131,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="margin-sm title d-flex mt-4">
-                                            <div class="button-group-container" style="margin-left: 15px;">
-                                                <button class="merchant-button pdf-button" type="submit">ADD</button>
-                                            </div>
 
-                                            <div class="clearfix"></div>
-                                        </div>
 
                                     </div>
                                 </form>
