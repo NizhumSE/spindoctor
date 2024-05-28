@@ -37,7 +37,7 @@
 </head>
 
 <body class="nav-md">
-<div class="container body">
+ <div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
@@ -145,150 +145,159 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="right_col" role="body">
-            <!-- top tiles -->
-            <div class="row d-flex">
-                <!--navbar start-->
-                <div class="navbar">
-                    <span class="navbar-text">Permission List</span>
-                    <div class="button-group-container mar-lsm">
-                        <a th:href="@{/auth/permissions/add}" class="merchant-button pdf-button" type="button">Add New
-                            Permission</a>
-                    </div>
-                </div>
-                <div class="navbar">
-                    <div class="search-bar">
-                        <input type="text" id="search" placeholder="Search">
-                        <button type="submit"><img th:src="@{/assets/images/adminImages/search.png}" alt="Profile Image"
-                                                   width="20"
-                                                   height="20"></button>
-                    </div>
-                </div>
-                <div class="navbar">
-                    <div class="dropdown pt-1">
-                        <label>
-                            <select class="groups-button-lg column-visibility-button dropdown-button" id="searchFilter"
-                                    onchange="searchFilterOnChangeValue()">
-                                <option>Search Filter</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
-                <!--nav close-->
-            </div>
-            <!-- /top tiles -->
-            <div class="row">
-                <div class="col-md-12 col-sm-12 ">
-                    <div class="dashboard_graph">
 
-                        <div class="row x_title">
-                            <div class="col-md-6 d-flex">
-                                <select class="action user-profile dropdown-toggle margin-rsm rounded-border"
-                                        aria-haspopup="true" id="navbarDropdown5"
-                                        aria-expanded="false" onchange="rowValueChange()">
-                                    <option value="5">5</option>
-                                    <option value="10" selected>10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
+            <!--started rol navbar here--!-->
+            <div class="row" style="display: block; ">
+                <!-- top tiles -->
+                <div class="row d-flex " style="width: 100%; display: flex;">
+                    <!--navbar start-->
+                    <div class="navbar">
+                        <span class="navbar-text">Permission List</span>
+                        <div class="button-group-container mar-lsm">
+                            <a th:href="@{/auth/permissions/add}" class="merchant-button pdf-button" type="button">Add New
+                                Permission</a>
+                        </div>
+                    </div>
+                    <div class="navbar">
+                        <div class="search-bar" style="width: 500px; position: relative;">
+                            <input type="text" id="search" placeholder="Search">
+                            <button type="submit"><img th:src="@{/assets/images/adminImages/search.png}" alt="Profile Image"
+                                                       width="20"
+                                                       height="20"></button>
+                        </div>
+                    </div>
+                    <div class="navbar">
+                        <div class="dropdown pt-1">
+                            <label>
+                                <select class="groups-button-lg column-visibility-button dropdown-button" id="searchFilter"
+                                        onchange="searchFilterOnChangeValue()">
+                                    <option>Search Filter</option>
                                 </select>
-                                <p class="text margin-sm pt-2">Records Per Page</p>
-                            </div>
-                            <div class="col-md-6">
+                            </label>
+                        </div>
+                    </div>
+                    <!--nav close-->
+                </div>
+                <!-- /top tiles -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 ">
+                        <div class="dashboard_graph">
 
-                                <div class="button-group-container">
-                                    <button class="groups-button pdf-button" type="button">PDF</button>
-                                    <button class="groups-button csv-button" type="button">CSV</button>
-                                    <button class="groups-button print-button" type="button">Print</button>
-                                    <button class="groups-button delete-button" type="button">Delete</button>
-                                    <div class="multiselect">
-                                        <div class="selectBox" onclick="showCheckboxes()">
-                                            <select class="column-visibility-button groups-button-lg">
-                                                <option>Column Visual</option>
-                                            </select>
-                                            <div class="overSelect"></div>
-                                        </div>
-                                        <div id="checkboxes" style="display: flex;">
+                            <div class="row x_title">
+                                <div class="col-md-6 d-flex">
+                                    <select class="action user-profile dropdown-toggle margin-rsm rounded-border"
+                                            aria-haspopup="true" id="navbarDropdown5"
+                                            aria-expanded="false" onchange="rowValueChange()">
+                                        <option value="5">5</option>
+                                        <option value="10" selected>10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    <p class="text margin-sm pt-2">Records Per Page</p>
+                                </div>
+                                <div class="col-md-6">
 
+                                    <div class="button-group-container">
+                                        <button class="groups-button pdf-button" type="button">PDF</button>
+                                        <button class="groups-button csv-button" type="button">CSV</button>
+                                        <button class="groups-button print-button" type="button">Print</button>
+                                        <button class="groups-button delete-button" type="button">Delete</button>
+                                        <div class="multiselect">
+                                            <div class="selectBox" onclick="showCheckboxes()">
+                                                <select class="column-visibility-button groups-button-lg">
+                                                    <option>Column Visual</option>
+                                                </select>
+                                                <div class="overSelect"></div>
+                                            </div>
+                                            <div id="checkboxes" style="display: flex;">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+                            <div class="fixed-table-wrap" style="width: 100%;">
+                                <table id="fresh-table" class="table">
+                                    <thead>
+                                    <tr>
+                                        <th rowspan="2" scope="col">Serial ID</th>
+                                        <th onclick="sortTable(1)" rowspan="2" scope="col">Permission Name</th>
+                                        <th rowspan="2" scope="col">Permission icon</th>
+                                        <th rowspan="2" scope="col">Permission URL</th>
+                                        <th onclick="sortTable(4)" rowspan="2" scope="col">Has Sub-Categories</th>
+                                        <th rowspan="2" scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--                                <tr th:each="permissionDTO, status: ${permissionDTOList}">-->
+                                    <!--                                    <td th:text="${status.index + 1}"></td>-->
+                                    <!--                                    <td th:text="${permissionDTO.permissionName}"></td>-->
+                                    <!--                                    <td th:text="${permissionDTO.iconPath == null ? 'N/A': permissionDTO.iconPath}"></td>-->
+                                    <!--                                    <td th:text="${permissionDTO.url == null ? 'N/A' : permissionDTO.url}"></td>-->
+                                    <!--                                    <td th:text="${permissionDTO.hasSubCategory == 'true' ? 'Yes' : 'No'}"></td>-->
+                                    <!--                                    <td>-->
+                                    <!--                                        <div class="dropdown">-->
+                                    <!--                                            <button class="dropbtn">Action</button>-->
+                                    <!--                                            <div id="myDropdown" class="dropdown-content">-->
+                                    <!--                                                <a th:href="@{/auth/permissoins/update/{permissionName}(permissionName=${permissionDTO.permissionName})}"-->
+                                    <!--                                                   type="button"-->
+                                    <!--                                                   class="btn-dark">Edit</a>-->
+                                    <!--                                                <a th:href="@{/auth/permissoins/delete/{permissionName}(permissionName=${permissionDTO.permissionName})}"-->
+                                    <!--                                                   type="button"-->
+                                    <!--                                                   class="btn-danger">Delete</a>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </td>-->
+                                    <!--                                </tr>-->
+                                    </tbody>
+                                </table>
+                                <!--                            <ul class="pagination">-->
+                                <!--                                <li onclick="prevPage()">Previous</li>-->
+                                <!--                                <li onclick="nextPage()">Next</li>-->
+                                <!--                            </ul>-->
+                            </div>
+                            <!--table finished-->
 
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="fixed-table-wrap" style="width: 100%;">
-                            <table id="fresh-table" class="table">
-                                <thead>
-                                <tr>
-                                    <th rowspan="2" scope="col">Serial ID</th>
-                                    <th onclick="sortTable(1)" rowspan="2" scope="col">Permission Name</th>
-                                    <th rowspan="2" scope="col">Permission icon</th>
-                                    <th rowspan="2" scope="col">Permission URL</th>
-                                    <th onclick="sortTable(4)" rowspan="2" scope="col">Has Sub-Categories</th>
-                                    <th rowspan="2" scope="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-<!--                                <tr th:each="permissionDTO, status: ${permissionDTOList}">-->
-<!--                                    <td th:text="${status.index + 1}"></td>-->
-<!--                                    <td th:text="${permissionDTO.permissionName}"></td>-->
-<!--                                    <td th:text="${permissionDTO.iconPath == null ? 'N/A': permissionDTO.iconPath}"></td>-->
-<!--                                    <td th:text="${permissionDTO.url == null ? 'N/A' : permissionDTO.url}"></td>-->
-<!--                                    <td th:text="${permissionDTO.hasSubCategory == 'true' ? 'Yes' : 'No'}"></td>-->
-<!--                                    <td>-->
-<!--                                        <div class="dropdown">-->
-<!--                                            <button class="dropbtn">Action</button>-->
-<!--                                            <div id="myDropdown" class="dropdown-content">-->
-<!--                                                <a th:href="@{/auth/permissoins/update/{permissionName}(permissionName=${permissionDTO.permissionName})}"-->
-<!--                                                   type="button"-->
-<!--                                                   class="btn-dark">Edit</a>-->
-<!--                                                <a th:href="@{/auth/permissoins/delete/{permissionName}(permissionName=${permissionDTO.permissionName})}"-->
-<!--                                                   type="button"-->
-<!--                                                   class="btn-danger">Delete</a>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
-                                </tbody>
-                            </table>
-                            <!--                            <ul class="pagination">-->
-                            <!--                                <li onclick="prevPage()">Previous</li>-->
-                            <!--                                <li onclick="nextPage()">Next</li>-->
-                            <!--                            </ul>-->
-                        </div>
-                        <!--table finished-->
+                    </div>
 
-                        <div class="clearfix"></div>
+
+                </div>
+
+                <div class="row d-flex justify-content-between">
+                    <div class="col-md-4 col-sm-4">
+                        <!--                    <div class="x_panel tile fixed_height_60">-->
+                        <!--                        <div class="x_title">-->
+                        <!--                            <p id="showPageNumbers">Showing 01-09</p>-->
+                        <!--                            <div class="clearfix"></div>-->
+                        <!--                        </div>-->
+
+                        <!--                    </div>-->
+                    </div>
+
+                    <!--next and previous button-->
+
+                    <div class="col-md-4 col-sm-4 margin-sml">
+                        <div class="x_title nav navbar-right panel_toolbox">
+                            <ul class="nav navbar-right panel_toolbox pagination">
+                                <li class="previous" onclick="prevPage()">Previous</li>
+                                <li class="previous-center" id="pageNumber">1</li>
+                                <li class="next" onclick="nextPage()">Next</li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
                 </div>
-
             </div>
 
-            <div class="row d-flex justify-content-between">
-                <div class="col-md-4 col-sm-4">
-                    <!--                    <div class="x_panel tile fixed_height_60">-->
-                    <!--                        <div class="x_title">-->
-                    <!--                            <p id="showPageNumbers">Showing 01-09</p>-->
-                    <!--                            <div class="clearfix"></div>-->
-                    <!--                        </div>-->
 
-                    <!--                    </div>-->
-                </div>
 
-                <!--next and previous button-->
-
-                <div class="col-md-4 col-sm-4 margin-sml">
-                    <div class="x_title nav navbar-right panel_toolbox">
-                        <ul class="nav navbar-right panel_toolbox pagination">
-                            <li class="previous" onclick="prevPage()">Previous</li>
-                            <li class="previous-center" id="pageNumber">1</li>
-                            <li class="next" onclick="nextPage()">Next</li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
         </div>
+
+
+
     </div>
 </div>
 

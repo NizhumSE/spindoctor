@@ -22,7 +22,7 @@ public class AdminPanelPermissionSubCategoryController {
 //    @GetMapping("/{permissionName}")
     @GetMapping("")
 //    public String PermissionSubCategory(Model model, @PathVariable("permissionName") String permissionName, @ModelAttribute("permissionSubCategoryDTO") PermissionSubCategoryRequestDTO permissionSubCategoryDTO) {
-    public String PermissionSubCategory(Model model, @PathVariable("permissionName") String permissionName, @ModelAttribute("permissionSubCategoryDTO") PermissionSubCategoryRequestDTO permissionSubCategoryDTO) {
+    public String PermissionSubCategory(Model model, @ModelAttribute("permissionSubCategoryDTO") PermissionSubCategoryRequestDTO permissionSubCategoryDTO) {
 //        List<PermissionSubCategoryRequestDTO> permissionSubCategoryDTOList = permissionSubCategoryDTOGetterMapper.apply(permissionSubCategoryRepository.findByPermissions_permissionName(permissionName));
 //        model.addAttribute("permissionSubCategoryDTOList", permissionSubCategoryDTOList);
         return "AdminPanel/Permission/permissions-subCategory";
