@@ -15,17 +15,17 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
-                configurer
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/auth/dashboard").permitAll()
+                        configurer
+                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/auth/dashboard").permitAll()
 
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/auth/**")).hasRole("ADMIN")
 
-                        .requestMatchers("/assets/**", "/images/**", "/fonts/**",
-                                "/resources/**", "/static/**", "/images",
-                                "/css/**", "/js/**", "/js", "/css").permitAll()
+                                .requestMatchers("/assets/**", "/images/**", "/fonts/**",
+                                        "/resources/**", "/static/**", "/images",
+                                        "/css/**", "/js/**", "/js", "/css").permitAll()
 
-                        .requestMatchers("/boostrapVendor/**", "/boostrapVendor/*...", "/boostrapVendor").permitAll()
+                                .requestMatchers("/boostrapVendor/**", "/boostrapVendor/*...", "/boostrapVendor").permitAll()
         );
 
         http

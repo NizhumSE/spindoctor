@@ -18,7 +18,8 @@ public class PermissionSubCategoryDTOGetterMapper implements Function<Permission
                 permissionSubCategory.getPermissions().getPermissionName(),
                 permissionSubCategory.getSubCategoryName(),
                 permissionSubCategory.getSubCategoryURL(),
-                permissionSubCategory.getMenuIconPath()
+                permissionSubCategory.getMenuIconPath(),
+                permissionSubCategory.getPermissions()
         );
     }
 

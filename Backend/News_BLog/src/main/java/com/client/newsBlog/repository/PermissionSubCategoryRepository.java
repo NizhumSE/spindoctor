@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface PermissionSubCategoryRepository extends JpaRepository<PermissionSubCategory, Long> {
     List<PermissionSubCategory> findByPermissions_permissionName(String permissionName);
+    PermissionSubCategory findBySubCategoryName(String subCategoryName);
+    PermissionSubCategory findBySubCategoryURL(String subCategoryURL);
 }

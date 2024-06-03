@@ -126,16 +126,17 @@
                         <div class="row x_title height-700">
                             <!--Right search buttons-->
                             <div class="box-border">
-                                <!--                                <form action="#" th:action="@{/auth/permissoins/add}" method="post"-->
-                                <!--                                      th:object="${permissionDTO}">-->
-                                <form action="#">
+                                <form action="#"
+                                      th:action="@{/auth/permissionsSubCategory/add/{permissionName}(permissionName = ${selectedPermissionName})}"
+                                      method="post"
+                                      th:object="${permissionSubCategoryDTO}">
                                     <div class="x_panel tile fixed_height_420 overflow_hidden" style="display: flex;">
                                         <div class="Merchant">
                                             <p class="font-m">SubCategory Name:*</p>
                                             <div class="title">
                                                 <div class="navbar pt-4">
                                                     <div class="search-bar-xsm">
-                                                        <input type="text"
+                                                        <input type="text" th:field="*{subCategoryName}"
                                                                placeholder="Enter subcategory name" required>
                                                     </div>
                                                 </div>
@@ -154,7 +155,8 @@
                                             <div class="title">
                                                 <div class="navbar pt-4">
                                                     <div class="search-bar-xsm">
-                                                        <input type="text" placeholder="Enter URL" required>
+                                                        <input th:field="*{subCategoryURL}" type="text"
+                                                               placeholder="Enter URL" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,8 +209,8 @@
                                     <select class="action user-profile dropdown-toggle margin-rsm rounded-border"
                                             aria-haspopup="true" id="navbarDropdown5"
                                             aria-expanded="false" onchange="rowValueChange()">
-                                        <option value="5">5</option>
-                                        <option value="10" selected>10</option>
+                                        <option value="5" selected>5</option>
+                                        <option value="10">10</option>
                                         <option value="15">15</option>
                                         <option value="20">20</option>
                                     </select>
@@ -250,19 +252,21 @@
                                     <tbody>
                                     <tr th:each="permissionSubCatregoryDTO, status: ${permissionSubCategoryDTOList}">
                                         <td th:text="${status.index + 1}"></td>
-                                        <td th:text="${permissionSubCatregoryDTO.permissionName}"></td>
+                                        <td th:text="${permissionSubCatregoryDTO.subCategoryName}"></td>
                                         <td th:text="${permissionSubCatregoryDTO.menuIconPath == null ? 'N/A': permissionSubCatregoryDTO.menuIconPath}"></td>
                                         <td th:text="${permissionSubCatregoryDTO.subCategoryURL == null ? 'N/A' : permissionSubCatregoryDTO.subCategoryURL}"></td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="dropbtn">Action</button>
                                                 <div id="myDropdown" class="dropdown-content">
-                                                    <a th:href="@{/auth/permissoins/update/{permissionName}(permissionName=${permissionDTO.permissionName})}"
-                                                       type="button"
-                                                       class="btn-dark">Edit</a>
-                                                    <a th:href="@{/auth/permissoins/delete/{permissionName}(permissionName=${permissionDTO.permissionName})}"
-                                                       type="button"
-                                                       class="btn-danger">Delete</a>
+                                                    <a th:href="@{/auth/permissionsSubCategory/updateSub/{permissionName}/{subCategoryName}
+                                                    (permissionName=${permissionSubCatregoryDTO.permissionName}, subCategoryName=${permissionSubCatregoryDTO.subCategoryName})}"
+                                                        type="button"
+                                                        class="btn-dark">Edit</a>
+                                                    <a th:href="@{/auth/permissionsSubCategory/delete/{permissionName}/{subCategoryName}
+                                                    (permissionName=${permissionSubCatregoryDTO.permissionName}, subCategoryName=${permissionSubCatregoryDTO.subCategoryName})}"
+                                                        type="button"
+                                                        class="btn-danger">Delete</a>
                                                 </div>
                                             </div>
                                         </td>

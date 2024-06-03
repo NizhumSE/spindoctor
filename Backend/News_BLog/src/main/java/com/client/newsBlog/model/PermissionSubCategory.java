@@ -15,7 +15,7 @@ public class PermissionSubCategory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "permission_sub_category_id")
     private Long permissionSubCategoryId;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.DETACH})
     @JoinColumn(name = "permission_id")
     private Permissions permissions;
     @Column(name = "sub_category_name")

@@ -1,10 +1,15 @@
 package com.client.newsBlog.service.adminPanel;
 
 import com.client.newsBlog.dto.adminPanel.request.PermissionRequestDTO;
+import com.client.newsBlog.dto.adminPanel.request.PermissionSubCategoryRequestDTO;
 import com.client.newsBlog.mapper.adminPanel.EntityToDTO.PermissionDTOGetterMapper;
 import com.client.newsBlog.mapper.adminPanel.createMapperDTOtoEntity.PermissionRequestDTOSetterMapper;
+import com.client.newsBlog.mapper.adminPanel.createMapperDTOtoEntity.PermissionSubCategoryRequestDTOSetterMapper;
 import com.client.newsBlog.mapper.adminPanel.editMapperDTOtoEntity.PermissionRequestEditDTOSetterMapper;
+import com.client.newsBlog.mapper.adminPanel.editMapperDTOtoEntity.PermissionSubCategoryRequestEditDTOSetterMapper;
+import com.client.newsBlog.model.PermissionSubCategory;
 import com.client.newsBlog.model.Permissions;
+import com.client.newsBlog.repository.PermissionSubCategoryRepository;
 import com.client.newsBlog.repository.PermissionsRepository;
 import com.client.newsBlog.service.adminPanel.adminPanelInterfaces.AdminPanelPermissionService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +24,10 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
     private final PermissionDTOGetterMapper permissionDTOGetterMapper;
     private final PermissionRequestDTOSetterMapper permissionRequestDTOSetterMapper;
     private final PermissionRequestEditDTOSetterMapper permissionRequestEditDTOSetterMapper;
+    private final PermissionSubCategoryRequestDTOSetterMapper permissionSubCategoryRequestDTOSetterMapper;
+    private final PermissionSubCategoryRepository permissionSubCategoryRepository;
+    private final PermissionSubCategoryRequestEditDTOSetterMapper permissionSubCategoryRequestEditDTOSetterMapper;
+
     public List<PermissionRequestDTO> getAllPermissions() {
         return permissionsRepository.findAll().stream().map(permissionDTOGetterMapper).toList();
     }
@@ -52,6 +61,8 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
         if(permissions == null){
             return "PermissionNotExist";
         }
+        List<PermissionSubCategory> permissionSubCategories = permissionSubCategoryRepository.findByPermissions_permissionName(permissionName);
+        permissionSubCategoryRepository.deleteAll(permissionSubCategories);
         permissionsRepository.delete(permissions);
         return "permissionDeleted";
     }
@@ -70,5 +81,49 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
     @Override
     public List<String> getAllPermissionName() {
         return permissionsRepository.findAll().stream().map(Permissions::getPermissionName).toList();
+    }
+
+    @Override
+    public String addSubCategoryToPermission(String permissionName, PermissionSubCategoryRequestDTO permissionSubCategoryDTO) {
+        Permissions permissions = permissionsRepository.findPermissionsByPermissionName(permissionName);
+        if (permissions == null) {
+            return "permissionNotExist";
+        }
+
+        PermissionSubCategory permissionSubCategory = permissionSubCategoryRepository.findBySubCategoryName(permissionSubCategoryDTO.getSubCategoryName());
+        if (permissionSubCategory != null) {
+            return "permissionSubCategoryAlreadyExist";
+        }
+
+        permissionSubCategory = permissionSubCategoryRepository.findBySubCategoryURL(permissionSubCategoryDTO.getSubCategoryURL());
+        if (permissionSubCategory != null) {
+            return"permissionSubCategoryUrlAlreadyExist";
+        }
+
+        permissionSubCategoryDTO.setPermissions(permissions);
+        permissionSubCategory = permissionSubCategoryRequestDTOSetterMapper.apply(permissionSubCategoryDTO);
+        permissionSubCategoryRepository.save(permissionSubCategory);
+        return "permissionSubCategoryAdded";
+    }
+
+    @Override
+    public String deleteSubCategoryFromPermission(String subCategoryName) {
+        PermissionSubCategory permissionSubCategory = permissionSubCategoryRepository.findBySubCategoryName(subCategoryName);
+        if(permissionSubCategory == null) {
+            return "subCategoryNotExist";
+        }
+        permissionSubCategoryRepository.delete(permissionSubCategory);
+        return "subCategoryDeleted";
+    }
+
+    @Override
+    public String updateSubCategoryFromPermission(String subCategoryName,PermissionSubCategoryRequestDTO permissionSubCategoryDTO) {
+        PermissionSubCategory permissionSubCategory = permissionSubCategoryRepository.findBySubCategoryName(subCategoryName);
+        if(permissionSubCategory == null){
+            return "subCategoryNotExist";
+        }
+        permissionSubCategory = permissionSubCategoryRequestEditDTOSetterMapper.apply(permissionSubCategoryDTO, permissionSubCategory);
+        permissionSubCategoryRepository.save(permissionSubCategory);
+        return "updatedPermissionSubCategory";
     }
 }

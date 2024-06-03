@@ -1,5 +1,6 @@
 package com.client.newsBlog.dto.adminPanel.request;
 
+import com.client.newsBlog.model.Permissions;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -13,4 +14,5 @@ public class PermissionSubCategoryRequestDTO {
     private String subCategoryName;
     private String subCategoryURL;
     private String menuIconPath;
+    private Permissions permissions;
 }

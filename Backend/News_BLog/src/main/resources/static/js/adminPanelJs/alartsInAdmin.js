@@ -29,6 +29,31 @@ document.addEventListener('DOMContentLoaded', function () {
         if (urlParams.has("updatedPermission")) {
             alert("Permission Updated Successfully.");
         }
+
+        if (urlParams.has("permissionSubCategoryAdded")) {
+            alert("Permission Sub-Category Added Successfully.");
+        }
+
+        if (urlParams.has("permissionSubCategoryAlreadyExist")) {
+            alert("Failed! Sub-Category Name Already Exists. Try Giving a Different Name.");
+        }
+
+        if (urlParams.has("permissionSubCategoryUrlAlreadyExist")) {
+            alert("Failed! Sub-Category URL Already Exists. Try Giving a Different URL.");
+        }
+
+        if (urlParams.has("subCategoryNotExist")) {
+            alert("Something Went Wrong. Please Try Again.");
+        }
+
+        if (urlParams.has("subCategoryDeleted")) {
+            alert("Permission-Sub-Category Deleted Successfully.")
+        }
+
+
+        if (urlParams.has("updatedPermissionSubCategory")) {
+            alert("Permission-Sub-Category Updated Successfully.")
+        }
     }
 
 
