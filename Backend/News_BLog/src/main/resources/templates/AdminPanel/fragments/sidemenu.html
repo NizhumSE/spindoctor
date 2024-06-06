@@ -44,12 +44,21 @@
                         <li><a>Sub-Category<span
                                 class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a th:href="@{/auth/permissionsSubCategory/Dashboard}">All Sub-Categories</a></li>
+                                <li><a th:href="@{/auth/permissionsSubCategory/Role}">All Sub-Categories</a></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
-
+                <div th:each="SideMenuDTO, status: ${SideMenuDTOList}">
+                    <li><a><img th:src="@{/assets/images/adminImages/roles.png}" alt=""><span
+                            class="fa fa-chevron-down" th:text="${SideMenuDTO.permissionName}"></span></a>
+                        <ul th:if="${SideMenuDTO.hasSubCategory == 1}" class="nav child_menu">
+                            <div th:each="subCategories, status: ${SideMenuDTO.subCategoryList}">
+                                <li><a th:href="@{${subCategories.subCategoryURL}}"><span th:text="${subCategories.subCategoryName}"></span></a></li>
+                            </div>
+                        </ul>
+                    </li>
+                </div>
             </ul>
         </div>
     </div>

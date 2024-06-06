@@ -21,7 +21,7 @@ public class AdminPanelPermissionSubCategoryController {
 
     @GetMapping("/{permissionName}")
     public String PermissionSubCategory(Model model, @PathVariable("permissionName") String permissionName, @ModelAttribute("permissionSubCategoryDTO") PermissionSubCategoryRequestDTO permissionSubCategoryDTO) {
-        List<PermissionSubCategoryRequestDTO> permissionSubCategoryDTOList = permissionSubCategoryDTOGetterMapper.apply(permissionSubCategoryRepository.findByPermissions_permissionName(permissionName));
+        List<PermissionSubCategoryRequestDTO> permissionSubCategoryDTOList = permissionSubCategoryDTOGetterMapper.apply(permissionSubCategoryRepository.findAllByPermissions_permissionName(permissionName));
         model.addAttribute("permissionSubCategoryDTOList", permissionSubCategoryDTOList);
 
         model.addAttribute("permissionNameListDTO", adminPanelPermissionService.getAllPermissionName());

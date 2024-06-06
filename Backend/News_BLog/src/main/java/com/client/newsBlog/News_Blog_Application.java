@@ -44,14 +44,14 @@ public class News_Blog_Application {
 	}
 
 	private void createPermission(PermissionsRepository permissionsRepository) {
-        Permissions permissions = permissionsRepository.findPermissionsByPermissionName("Dashboard");
-        if (permissions == null) {
-            permissions = new Permissions();
-			permissions.setPermissionName("Dashboard");
-			permissions.setURL("/auth/dashboard");
-			permissions.setHasSubCategory(true);
-            permissionsRepository.save(permissions);
-			System.out.println("*** Dashboard Permission Created ***");
+        Permissions permissions_role = permissionsRepository.findPermissionsByPermissionName("Role");
+        if (permissions_role == null) {
+			permissions_role = new Permissions();
+			permissions_role.setPermissionName("Role");
+			permissions_role.setURL("/auth/role");
+			permissions_role.setHasSubCategory(true);
+            permissionsRepository.save(permissions_role);
+			System.out.println("*** Role Permission Created ***");
         }
     }
 

@@ -2,7 +2,9 @@ package com.client.newsBlog.service.adminPanel;
 
 import com.client.newsBlog.dto.adminPanel.request.PermissionRequestDTO;
 import com.client.newsBlog.dto.adminPanel.request.PermissionSubCategoryRequestDTO;
+import com.client.newsBlog.dto.adminPanel.response.SideMenuItemsDTO;
 import com.client.newsBlog.mapper.adminPanel.EntityToDTO.PermissionDTOGetterMapper;
+import com.client.newsBlog.mapper.adminPanel.EntityToDTO.SideMenuItemsDTOGetterMapper;
 import com.client.newsBlog.mapper.adminPanel.createMapperDTOtoEntity.PermissionRequestDTOSetterMapper;
 import com.client.newsBlog.mapper.adminPanel.createMapperDTOtoEntity.PermissionSubCategoryRequestDTOSetterMapper;
 import com.client.newsBlog.mapper.adminPanel.editMapperDTOtoEntity.PermissionRequestEditDTOSetterMapper;
@@ -15,6 +17,8 @@ import com.client.newsBlog.service.adminPanel.adminPanelInterfaces.AdminPanelPer
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.security.Permission;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +31,7 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
     private final PermissionSubCategoryRequestDTOSetterMapper permissionSubCategoryRequestDTOSetterMapper;
     private final PermissionSubCategoryRepository permissionSubCategoryRepository;
     private final PermissionSubCategoryRequestEditDTOSetterMapper permissionSubCategoryRequestEditDTOSetterMapper;
+    private final SideMenuItemsDTOGetterMapper sideMenuItemsDTOGetterMapper;
 
     public List<PermissionRequestDTO> getAllPermissions() {
         return permissionsRepository.findAll().stream().map(permissionDTOGetterMapper).toList();
@@ -61,7 +66,7 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
         if(permissions == null){
             return "PermissionNotExist";
         }
-        List<PermissionSubCategory> permissionSubCategories = permissionSubCategoryRepository.findByPermissions_permissionName(permissionName);
+        List<PermissionSubCategory> permissionSubCategories = permissionSubCategoryRepository.findAllByPermissions_permissionName(permissionName);
         permissionSubCategoryRepository.deleteAll(permissionSubCategories);
         permissionsRepository.delete(permissions);
         return "permissionDeleted";
@@ -125,5 +130,15 @@ public class AdminPanelPermissionServiceImpl implements AdminPanelPermissionServ
         permissionSubCategory = permissionSubCategoryRequestEditDTOSetterMapper.apply(permissionSubCategoryDTO, permissionSubCategory);
         permissionSubCategoryRepository.save(permissionSubCategory);
         return "updatedPermissionSubCategory";
+    }
+
+    @Override
+    public List<SideMenuItemsDTO> getAllSideMenuItems() {
+        List<Permissions> allPermissions = permissionsRepository.findAll();
+        List<SideMenuItemsDTO> sideMenuItemsDTOS = new ArrayList<>();
+        for(Permissions permission : allPermissions){
+            sideMenuItemsDTOS.add(sideMenuItemsDTOGetterMapper.apply(permission));
+        }
+        return sideMenuItemsDTOS;
     }
 }
