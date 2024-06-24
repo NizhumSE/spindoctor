@@ -9,15 +9,15 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 
 import java.util.Collection;
 
-public class RoleBasedAuthenticaionSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class RoleBasedAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        System.out.println(authorities);
+        System.out.println("authority :::" + authorities);
         if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            return "/auth/admin";
+            return "/auth/dashboard";
         } else {
-            return "index";
+            return "/auth/login";
         }
     }
 }

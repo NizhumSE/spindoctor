@@ -9,18 +9,22 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "role_permission")
-public class RolePermission {
+@Table(name = "permission_sub_category")
+public class PermissionSubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_permission_id")
-    private Long rolePermissionId;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @Column(name = "permission_sub_category_id")
+    private Long permissionSubCategoryId;
+    @ManyToOne(cascade = {CascadeType.DETACH})
     @JoinColumn(name = "permission_id")
     private Permissions permissions;
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @Column(name = "sub_category_name")
+    private String subCategoryName;
+    @Column(name = "sub_category_url")
+    private String subCategoryURL;
+    @Column(name = "menu_icon_path")
+    private String menuIconPath;
+
 
     @CreationTimestamp
     @Column(name="datecreated", updatable = false)

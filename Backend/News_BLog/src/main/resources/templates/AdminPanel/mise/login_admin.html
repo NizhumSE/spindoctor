@@ -25,21 +25,20 @@
     <link th:href="@{/css/adminPanelCss/login_admin.css}" rel="stylesheet">
 
 </head>
-<body>
-<div class="background-container">
+<body class="form-body">
     <div class="login-container">
         <h2 class="color-changer">Admin Panel Login</h2>
-        <form>
+        <form action="#" th:action="@{/auth/loginUser}" th:object="${userRequestDTO}" method="post">
+            <p class="alert" th:if="${param.loginError}">Invalid email or password</p>
             <div class="form-group">
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                <input type="email" class="form-control" id="username" name="username" placeholder="Email" required>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="password" placeholder="Password" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
     </div>
-</div>
 
 <!-- jQuery -->
 <script th:src="@{/boostrapVendor/jquery/dist/jquery.min.js}"></script>

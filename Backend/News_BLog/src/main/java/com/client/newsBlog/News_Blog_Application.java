@@ -1,28 +1,17 @@
 package com.client.newsBlog;
 
-//import com.attrabit.wellax_.config.TwilioOTPConfig;
-//import com.attrabit.wellax_.model.MerchantType;
-//import com.attrabit.wellax_.model.Role;
-//import com.attrabit.wellax_.model.User;
-//import com.attrabit.wellax_.repository.MerchantTypeRepository;
-//import com.attrabit.wellax_.repository.RoleRepository;
-//import com.attrabit.wellax_.repository.UserRepository;
-//import com.twilio.Twilio;
-//import jakarta.annotation.PostConstruct;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.CommandLineRunner;
+import com.client.newsBlog.model.Permissions;
 import com.client.newsBlog.model.Role;
 import com.client.newsBlog.model.User;
+import com.client.newsBlog.repository.PermissionsRepository;
 import com.client.newsBlog.repository.RoleRepository;
 import com.client.newsBlog.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication
@@ -34,8 +23,11 @@ public class News_Blog_Application {
 	}
 
 	@Bean
-	CommandLineRunner run(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+	CommandLineRunner run(PermissionsRepository permissionsRepository,
+						  RoleRepository roleRepository, UserRepository userRepository,
+						  PasswordEncoder passwordEncoder) {
 		return args -> {
+			createPermission(permissionsRepository);
 			Role adminRole = roleRepository.findByRoleName("ADMIN");
 			if(adminRole != null){
 				System.out.println("*** Admin already exists ***");
@@ -50,5 +42,17 @@ public class News_Blog_Application {
 			userRepository.save(adminUser);
 		};
 	}
+
+	private void createPermission(PermissionsRepository permissionsRepository) {
+        Permissions permissions_role = permissionsRepository.findPermissionsByPermissionName("Role");
+        if (permissions_role == null) {
+			permissions_role = new Permissions();
+			permissions_role.setPermissionName("Role");
+			permissions_role.setURL("/auth/role");
+			permissions_role.setHasSubCategory(true);
+            permissionsRepository.save(permissions_role);
+			System.out.println("*** Role Permission Created ***");
+        }
+    }
 
 }

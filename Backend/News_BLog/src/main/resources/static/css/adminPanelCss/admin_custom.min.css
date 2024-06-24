@@ -2121,7 +2121,7 @@ body {
 
 	background-color: #FFFFFF;
 	font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-	font-size: 13px;
+	font-size: 16px;
 	font-weight: 400;
 	line-height: 1.471
 }
@@ -2599,7 +2599,7 @@ a:focus {
 
 .nav.child_menu>li>a {
 	color: rgba(255, 255, 255, 0.75);
-	font-size: 12px;
+	font-size: 15px;
 	padding: 9px
 }
 

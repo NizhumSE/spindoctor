@@ -11,4 +11,5 @@ import java.util.List;
 public interface PermissionsRepository extends JpaRepository<Permissions, Long> {
     Permissions findByPermissionId(Long permissionId);
     Permissions findPermissionsByPermissionName(String permissionName);
+    Permissions findPermissionsByURL(String url);
 }
