@@ -18,6 +18,7 @@ public class SecurityConfiguration {
                         configurer
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/auth/dashboard").permitAll()
+                                .requestMatchers("/index/**").permitAll()
 
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/auth/**")).hasRole("ADMIN")
 
